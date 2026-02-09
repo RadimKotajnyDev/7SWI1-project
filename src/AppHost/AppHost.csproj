@@ -8,4 +8,8 @@
     <UserSecretsId>32af3917-0988-47f2-aa03-cb921fbf81f9</UserSecretsId>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Gateway\Gateway.csproj" />
+  </ItemGroup>
+
 </Project>
