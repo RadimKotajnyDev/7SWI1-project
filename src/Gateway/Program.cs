@@ -1,3 +1,5 @@
+using ServiceDefaults;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add service discovery and YARP
