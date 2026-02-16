@@ -1,5 +1,6 @@
 <Solution>
     <Project Path="src/AppHost/AppHost.csproj" />
+    <Project Path="src/AuthService/AuthService.csproj" />
     <Project Path="src/Gateway/Gateway.csproj" />
     <Project Path="src/Infrastructure/Infrastructure.csproj" />
     <Project Path="src/MigrationService/MigrationService.csproj" />
