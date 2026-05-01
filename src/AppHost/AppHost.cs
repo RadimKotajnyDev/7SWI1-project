@@ -1,17 +1,15 @@
-using Projects;
+using Scalar.Aspire;
 
 var builder = DistributedApplication.CreateBuilder(args);
 
-var postgres = builder.AddPostgres("db-postgres")
-    .WithDataVolume("db-postgres-data");
-
+var postgres = builder.AddPostgres("db-postgres");
 var db = postgres.AddDatabase("db");
 
-var migrationService = builder.AddProject<MigrationService>("migration-service")
-    .WaitFor(db)
+var authService = builder.AddProject<Projects.AuthService>("auth-service")
     .WithReference(db);
 
-builder.AddProject<Gateway>("gateway")
+var gateway = builder.AddProject<Projects.Gateway>("gateway")
+    .WithReference(authService)
     .WithExternalHttpEndpoints();
 
-builder.Build().Run();
+await builder.Build().RunAsync();
