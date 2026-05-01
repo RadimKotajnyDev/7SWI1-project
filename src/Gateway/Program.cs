@@ -1,13 +1,55 @@
+using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
 using ServiceDefaults;
+using Yarp.ReverseProxy.Transforms;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Add service discovery and YARP
-builder.AddServiceDefaults(); 
+builder.AddServiceDefaults();
+
+var key = "YourSuperSecretKeyGoesHere-MustBeLong"u8.ToArray();
+builder.Services.AddAuthentication("Bearer")
+    .AddJwtBearer("Bearer", options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false
+        };
+    });
+
+builder.Services.AddAuthorization();
+
 builder.Services.AddReverseProxy()
-    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"));
+    .LoadFromConfig(builder.Configuration.GetSection("ReverseProxy"))
+    .AddServiceDiscoveryDestinationResolver()
+    .AddTransforms(builderContext =>
+    {
+        builderContext.AddRequestTransform(transformContext =>
+        {
+            transformContext.ProxyRequest.Headers.Remove("X-User-Roles");
+            transformContext.ProxyRequest.Headers.Remove("X-User-Id");
+
+            var user = transformContext.HttpContext.User;
+
+            if (user.Identity?.IsAuthenticated != true) return ValueTask.CompletedTask;
+
+            var roles = user.FindAll(ClaimTypes.Role).Select(c => c.Value);
+            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? user.Identity.Name;
+
+            transformContext.ProxyRequest.Headers.Add("X-User-Roles", string.Join(",", roles));
+            transformContext.ProxyRequest.Headers.Add("X-User-Id", userId ?? string.Empty);
+
+            return ValueTask.CompletedTask;
+        });
+    });
 
 var app = builder.Build();
 
+app.UseAuthentication();
+app.UseAuthorization();
+
 app.MapReverseProxy();
-app.Run();
+await app.RunAsync();

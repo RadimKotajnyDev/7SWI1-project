@@ -9,14 +9,18 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Gateway\Gateway.csproj"/>
+        <ProjectReference Include="..\AuthService\AuthService.csproj" />
+        <ProjectReference Include="..\Gateway\Gateway.csproj" />
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
         <ProjectReference Include="..\MigrationService\MigrationService.csproj" />
         <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.0.2"/>
+        <PackageReference Include="Aspire.Hosting.AppHost" Version="13.2.4" />
+        <PackageReference Include="Aspire.Hosting.PostgreSQL" Version="13.2.4" />
+        <PackageReference Include="Aspire.Hosting.Yarp" Version="13.2.4" />
+        <PackageReference Include="Scalar.Aspire" Version="0.9.32" />
     </ItemGroup>
 
 </Project>
