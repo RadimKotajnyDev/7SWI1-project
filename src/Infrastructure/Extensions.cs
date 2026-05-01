@@ -8,20 +8,37 @@ namespace Infrastructure;
 
 public static class Extensions
 {
-    public static IServiceCollection AddInfrastructure(
-        this IServiceCollection services,
-        IConfiguration configuration)
+    extension(IServiceCollection services)
     {
-        var cs = configuration.GetConnectionString("db");
+        public IServiceCollection AddInfrastructure(IConfiguration configuration)
+        {
+            var cs = configuration.GetConnectionString("db");
 
-        services.AddDbContext<InfrastructureDbContext>(options => { options.UseNpgsql(cs); });
+            services.AddDbContext<InfrastructureDbContext>(options => { options.UseNpgsql(cs); });
 
-        services.AddHealthChecks()
-            .AddDbContextCheck<InfrastructureDbContext>(
-                name: "postgres-db",
-                failureStatus: HealthStatus.Unhealthy,
-                tags: ["db", "ready", "postgres"]);
+            services.AddHealthChecks()
+                .AddDbContextCheck<InfrastructureDbContext>(
+                    name: "postgres-db",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: ["db", "ready", "postgres"]);
 
-        return services;
+            return services;
+        }
+
+        public IServiceCollection AddAuth(IConfiguration configuration)
+        {
+            var cs = configuration.GetConnectionString("db");
+
+            services.AddDbContext<AuthDbContext>(options => { options.UseNpgsql(cs); });
+
+            services.AddHealthChecks()
+                .AddDbContextCheck<AuthDbContext>(
+                    name: "postgres-auth-db",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: ["db", "ready", "postgres", "auth"]
+                );
+
+            return services;
+        }
     }
 }
