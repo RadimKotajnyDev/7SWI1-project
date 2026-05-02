@@ -1,4 +1,4 @@
-namespace AuthService.Common;
+namespace Shared.Auth;
 
 public class JwtConfiguration
 {
