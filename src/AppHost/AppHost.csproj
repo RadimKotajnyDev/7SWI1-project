@@ -14,6 +14,7 @@
         <ProjectReference Include="..\Infrastructure\Infrastructure.csproj" />
         <ProjectReference Include="..\MigrationService\MigrationService.csproj" />
         <ProjectReference Include="..\ServiceDefaults\ServiceDefaults.csproj" />
+        <ProjectReference Include="..\SharedFridgeService\SharedFridgeService.csproj" />
         <ProjectReference Include="..\UserService\UserService.csproj" />
     </ItemGroup>
 

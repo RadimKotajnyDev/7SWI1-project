@@ -20,9 +20,14 @@ var userService = builder.AddProject<UserService>("user-service")
     .WithReference(db)
     .WaitForCompletion(migrationWorker);
 
+var sharedFridgeService = builder.AddProject<SharedFridgeService>("shared-fridge-service")
+    .WithReference(db)
+    .WaitForCompletion(migrationWorker);
+
 var gateway = builder.AddProject<Gateway>("gateway")
     .WithReference(authService)
     .WithReference(userService)
+    .WithReference(sharedFridgeService)
     .WithExternalHttpEndpoints();
 
 var frontend = builder.AddJavaScriptApp("frontend", "../Frontend", "dev")

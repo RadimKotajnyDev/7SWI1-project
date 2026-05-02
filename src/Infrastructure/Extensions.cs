@@ -60,5 +60,21 @@ public static class Extensions
 
             return services;
         }
+
+        public IServiceCollection AddSharedFridge(IConfiguration configuration)
+        {
+            var cs = configuration.GetConnectionString("db");
+
+            services.AddDbContext<SharedFridgeDbContext>(options => { options.UseNpgsql(cs); });
+
+            services.AddHealthChecks()
+                .AddDbContextCheck<SharedFridgeDbContext>(
+                    name: "postgres-shared-fridge-db",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: ["db", "ready", "postgres", "shared-fridge"]
+                );
+
+            return services;
+        }
     }
 }
