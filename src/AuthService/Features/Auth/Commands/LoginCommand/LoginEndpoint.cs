@@ -7,6 +7,7 @@ using FastEndpoints.Security;
 using Infrastructure.Data.Contexts;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using Shared.Auth;
 
 namespace AuthService.Features.Auth.Commands.LoginCommand;
 
