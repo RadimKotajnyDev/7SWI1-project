@@ -25,4 +25,10 @@ var gateway = builder.AddProject<Gateway>("gateway")
     .WithReference(userService)
     .WithExternalHttpEndpoints();
 
+var frontend = builder.AddJavaScriptApp("frontend", "../Frontend", "dev")
+    .WithReference(gateway)
+    .WithEnvironment("VITE_GATEWAY_URL", gateway.GetEndpoint("http"))
+    .WithHttpEndpoint(port: 3173, name: "http")
+    .WithExternalHttpEndpoints();
+
 await builder.Build().RunAsync();
