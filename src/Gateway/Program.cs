@@ -8,6 +8,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.AddServiceDefaults();
 
 var key = "YourSuperSecretKeyGoesHere-MustBeLong"u8.ToArray();
+const string issuer = "auth-service";
+const string audience = "KanclIO";
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
@@ -15,8 +17,10 @@ builder.Services.AddAuthentication("Bearer")
         {
             ValidateIssuerSigningKey = true,
             IssuerSigningKey = new SymmetricSecurityKey(key),
-            ValidateIssuer = false,
-            ValidateAudience = false
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidIssuers = [issuer],
+            ValidAudiences = [audience]
         };
     });
 
