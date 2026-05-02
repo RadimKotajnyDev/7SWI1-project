@@ -48,7 +48,6 @@ beforeEach(() => {
   clearAccessToken();
   vi.stubGlobal("window", { location: { replace: vi.fn() } });
 
-  // @ts-expect-error – override the adapter for testing
   axiosInstance.defaults.adapter = (config: any) => {
     const next = handlers.shift();
     if (!next) throw new Error("No adapter handler queued for this request");

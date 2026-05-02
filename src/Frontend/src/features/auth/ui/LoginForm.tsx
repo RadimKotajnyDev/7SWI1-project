@@ -4,10 +4,12 @@ import {
   Field,
   Heading,
   Input,
+  Link,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { type FormEvent, useState } from "react";
+import { Link as RouterLink } from "react-router";
 import { useLogin } from "../api/queries";
 
 interface LoginFormProps {
@@ -59,6 +61,13 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
         <Button type="submit" loading={isPending} w="full">
           Sign in
         </Button>
+
+        <Text fontSize="sm" textAlign="center">
+          Don't have an account?{" "}
+          <Link asChild color="blue.500">
+            <RouterLink to="/register">Register</RouterLink>
+          </Link>
+        </Text>
       </Stack>
     </Box>
   );
