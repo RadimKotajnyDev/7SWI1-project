@@ -14,7 +14,11 @@ public static class Extensions
         {
             var cs = configuration.GetConnectionString("db");
 
-            services.AddDbContext<InfrastructureDbContext>(options => { options.UseNpgsql(cs); });
+            services.AddDbContext<InfrastructureDbContext>(options =>
+            {
+                options.UseNpgsql(cs,
+                    npgsqlOptions => npgsqlOptions.MigrationsAssembly("Infrastructure"));
+            });
 
             services.AddHealthChecks()
                 .AddDbContextCheck<InfrastructureDbContext>(
@@ -36,6 +40,22 @@ public static class Extensions
                     name: "postgres-auth-db",
                     failureStatus: HealthStatus.Unhealthy,
                     tags: ["db", "ready", "postgres", "auth"]
+                );
+
+            return services;
+        }
+
+        public IServiceCollection AddUser(IConfiguration configuration)
+        {
+            var cs = configuration.GetConnectionString("db");
+
+            services.AddDbContext<UserDbContext>(options => { options.UseNpgsql(cs); });
+
+            services.AddHealthChecks()
+                .AddDbContextCheck<UserDbContext>(
+                    name: "postgres-user-db",
+                    failureStatus: HealthStatus.Unhealthy,
+                    tags: ["db", "ready", "postgres", "user"]
                 );
 
             return services;
