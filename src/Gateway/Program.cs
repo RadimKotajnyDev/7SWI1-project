@@ -24,6 +24,8 @@ const string audience = "KanclIO";
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {
+        options.RequireHttpsMetadata = false; 
+        
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuerSigningKey = true,
@@ -46,8 +48,11 @@ builder.Services.AddReverseProxy()
         {
             transformContext.ProxyRequest.Headers.Remove("X-User-Roles");
             transformContext.ProxyRequest.Headers.Remove("X-User-Id");
-
+            
             var user = transformContext.HttpContext.User;
+            
+            Console.WriteLine($"[GATEWAY] Processing request: {transformContext.HttpContext.Request.Path}");
+            Console.WriteLine($"[GATEWAY] User Authenticated: {user.Identity?.IsAuthenticated}");
 
             if (user.Identity?.IsAuthenticated != true) return ValueTask.CompletedTask;
 
