@@ -7,4 +7,8 @@ export const ROUTES = {
     name: "Register",
     path: "/register",
   },
+  HOME: {
+    name: "Home",
+    path: "/",
+  },
 } as const;
