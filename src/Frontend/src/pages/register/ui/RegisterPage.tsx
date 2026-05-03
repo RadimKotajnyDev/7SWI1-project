@@ -10,7 +10,7 @@ export const RegisterPage = () => {
     <Box minH="100vh" bg="bg">
       <Box
         h="6px"
-        bg="#C87941"
+        bg="#AB886D"
         borderBottom="2px solid"
         borderColor="border"
       />
@@ -34,7 +34,12 @@ export const RegisterPage = () => {
             >
               KANCL.IO
             </Text>
-            <Text color="fg.muted" fontSize="sm" fontWeight="500" fontFamily="body">
+            <Text
+              color="fg.muted"
+              fontSize="sm"
+              fontWeight="500"
+              fontFamily="body"
+            >
               Office management, made fun.
             </Text>
           </Stack>

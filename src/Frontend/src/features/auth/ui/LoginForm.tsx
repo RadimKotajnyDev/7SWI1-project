@@ -23,8 +23,8 @@ const INPUT_STYLES = {
   bg: "bg",
   fontFamily: "body",
   _focusVisible: {
-    boxShadow: "4px 4px 0px #C87941",
-    borderColor: "#C87941",
+    boxShadow: "4px 4px 0px #AB886D",
+    borderColor: "#AB886D",
     outline: "none",
   },
 } as const;
@@ -82,8 +82,8 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
         </Stack>
 
         {error && (
-          <Box border="2px solid" borderColor="#D94F3D" p={3}>
-            <Text color="#D94F3D" fontSize="sm" fontWeight="600">
+          <Box border="2px solid" borderColor="#9B3520" p={3}>
+            <Text color="#9B3520" fontSize="sm" fontWeight="600">
               {error instanceof Error ? error.message : "Login failed"}
             </Text>
           </Box>
@@ -93,7 +93,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           type="submit"
           loading={isPending}
           w="full"
-          bg="#C87941"
+          bg="#AB886D"
           color="fg"
           border="2px solid"
           borderColor="border"
@@ -103,7 +103,7 @@ export const LoginForm = ({ onSuccess }: LoginFormProps) => {
           boxShadow="xs"
           transition="all 0.15s ease"
           _hover={{
-            bg: "#A85E28",
+            bg: "#AB886D",
             boxShadow: "3px 3px 0px var(--chakra-colors-border)",
             transform: "translate(-2px, -2px)",
           }}

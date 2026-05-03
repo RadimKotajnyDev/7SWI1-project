@@ -99,28 +99,28 @@ const FEATURE_CARDS: FeatureCardProps[] = [
     description: "Scan QR codes, track what's inside",
     icon: LuQrCode,
     href: "/fridge",
-    accentColor: "#C87941",
+    accentColor: "#AB886D",
   },
   {
     label: "Snack Inventory",
     description: "Browse snacks, manage the wishlist",
     icon: LuPackage,
     href: "/snacks",
-    accentColor: "#5B6FE0",
+    accentColor: "#4A6FA5",
   },
   {
     label: "Coffee Roulette",
     description: "Who cleans the machine today?",
     icon: LuCoffee,
     href: "/coffee",
-    accentColor: "#D94F3D",
+    accentColor: "#AB886D",
   },
   {
     label: "Admin Dashboard",
     description: "Roles, stats, system controls",
     icon: LuLayoutDashboard,
     href: "/admin",
-    accentColor: "#3D9E5C",
+    accentColor: "#3D7A4A",
   },
 ];
 
@@ -146,7 +146,7 @@ export const HomePage = () => {
             fontFamily="heading"
             fontWeight="800"
             fontSize="xl"
-            color="#C87941"
+            color="#AB886D"
             letterSpacing="-0.03em"
           >
             KANCL.IO
@@ -175,7 +175,7 @@ export const HomePage = () => {
                   {isLoading ? (
                     <Skeleton h="24px" w="24px" borderRadius="full" />
                   ) : (
-                    <Avatar.Root size="xs" bg="#C87941" color="fg">
+                    <Avatar.Root size="xs" bg="#AB886D" color="fg">
                       <Avatar.Fallback>
                         {profile?.username?.charAt(0).toUpperCase() ?? "?"}
                       </Avatar.Fallback>
@@ -231,7 +231,7 @@ export const HomePage = () => {
                 <Box p={1}>
                   <Menu.Item
                     value="logout"
-                    color="#D94F3D"
+                    color="#AB886D"
                     fontFamily="body"
                     fontWeight="600"
                     borderRadius="none"

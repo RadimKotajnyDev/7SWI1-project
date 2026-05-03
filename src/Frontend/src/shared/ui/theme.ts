@@ -20,27 +20,26 @@ const config = defineConfig({
       },
       colors: {
         brand: {
-          DEFAULT: { value: "#C87941" },
-          hover: { value: "#A85E28" },
-          dark: { value: "#E09458" },
+          DEFAULT: { value: "#AB886D" },
+          hover: { value: "#7A5F4B" },
+          light: { value: "#C4A98E" },
         },
         accent: {
-          fridge: { value: "#C87941" },
-          snacks: { value: "#5B6FE0" },
-          coffee: { value: "#D94F3D" },
-          admin: { value: "#3D9E5C" },
+          fridge: { value: "#AB886D" },
+          snacks: { value: "#4A6FA5" },
+          coffee: { value: "#7A5F4B" },
+          admin: { value: "#3D7A4A" },
         },
-        coffee: {
-          50: { value: "#FDF0DC" },
-          100: { value: "#FAE8CC" },
-          200: { value: "#F5DDB0" },
-          300: { value: "#E8C07A" },
-          400: { value: "#C87941" },
-          500: { value: "#A85E28" },
-          600: { value: "#7A4A1E" },
-          700: { value: "#4A2800" },
-          800: { value: "#2D1200" },
-          900: { value: "#1A0A00" },
+        palette: {
+          white: { value: "#E4E0E1" },
+          mist: { value: "#D6C0B3" },
+          dust: { value: "#C5AA97" },
+          tan: { value: "#AB886D" },
+          umber: { value: "#7A5F4B" },
+          bark: { value: "#5C4535" },
+          espresso: { value: "#493628" },
+          darkMist: { value: "#5C4535" },
+          darkDust: { value: "#7A5F4B" },
         },
       },
       radii: {
@@ -65,35 +64,44 @@ const config = defineConfig({
       colors: {
         bg: {
           DEFAULT: {
-            value: { base: "{colors.coffee.50}", _dark: "{colors.coffee.900}" },
+            value: {
+              base: "{colors.palette.white}",
+              _dark: "{colors.palette.espresso}",
+            },
           },
           subtle: {
             value: {
-              base: "{colors.coffee.100}",
-              _dark: "{colors.coffee.800}",
+              base: "{colors.palette.mist}",
+              _dark: "{colors.palette.darkMist}",
             },
           },
           muted: {
             value: {
-              base: "{colors.coffee.200}",
-              _dark: "{colors.coffee.700}",
+              base: "{colors.palette.dust}",
+              _dark: "{colors.palette.darkDust}",
             },
           },
         },
         fg: {
           DEFAULT: {
-            value: { base: "{colors.coffee.900}", _dark: "{colors.coffee.50}" },
+            value: {
+              base: "{colors.palette.espresso}",
+              _dark: "{colors.palette.white}",
+            },
           },
           muted: {
             value: {
-              base: "{colors.coffee.600}",
-              _dark: "{colors.coffee.300}",
+              base: "{colors.palette.umber}",
+              _dark: "{colors.palette.mist}",
             },
           },
         },
         border: {
           DEFAULT: {
-            value: { base: "{colors.coffee.900}", _dark: "{colors.coffee.50}" },
+            value: {
+              base: "{colors.palette.espresso}",
+              _dark: "{colors.palette.white}",
+            },
           },
         },
       },
