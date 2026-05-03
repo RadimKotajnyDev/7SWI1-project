@@ -1,5 +1,6 @@
 using FastEndpoints;
 using Infrastructure.Data.Contexts;
+using Infrastructure.Entities.Auth;
 using Microsoft.EntityFrameworkCore;
 
 namespace SharedFridgeService.Features.SharedFridge.Commands.Delete;
@@ -9,7 +10,7 @@ public class DeleteEndpoint(SharedFridgeDbContext db) : EndpointWithoutRequest
     public override void Configure()
     {
         Delete("/fridge/snacks/{id}");
-        Roles("FridgeManager");
+        Roles(nameof(IdentityRole.User));
     }
 
     public override async Task HandleAsync(CancellationToken ct)

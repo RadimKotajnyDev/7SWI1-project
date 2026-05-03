@@ -1,6 +1,7 @@
 using System.Security.Claims;
 using FastEndpoints;
 using Infrastructure.Data.Contexts;
+using Infrastructure.Entities.Auth;
 using Infrastructure.Entities.SharedFridge;
 
 namespace SharedFridgeService.Features.SharedFridge.Commands.Create;
@@ -10,7 +11,7 @@ public class CreateEndpoint(SharedFridgeDbContext db) : Endpoint<CreateSnackRequ
     public override void Configure()
     {
         Post("/fridge/snacks");
-        Roles("FridgeManager");
+        Roles(nameof(IdentityRole.User));
     }
 
     public override async Task HandleAsync(CreateSnackRequest req, CancellationToken ct)
