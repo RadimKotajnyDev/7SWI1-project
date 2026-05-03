@@ -49,6 +49,7 @@ public class RegisterEndpoint(AuthDbContext db, IOptions<JwtConfiguration> confi
                 privileges.Claims.Add(new Claim(ClaimTypes.Email, identity.Email));
                 privileges.Claims.Add(new Claim("iss", config.Value.Issuer));
                 privileges.Claims.Add(new Claim("aud", config.Value.Audience));
+                privileges.Claims.Add(new Claim("sub", identity.Id.ToString()));
             });
 
         await Send.OkAsync(tokenResponse, ct);

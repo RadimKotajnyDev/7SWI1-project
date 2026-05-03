@@ -22,7 +22,7 @@ public class CreateEndpoint(UserDbContext db) : Endpoint<CreateProfileRequest>
             IdentityId = identityId,
             FirstName = req.FirstName,
             LastName = req.LastName,
-            DateOfBirth = req.DateOfBirth
+            DateOfBirth = req.DateOfBirth.ToUniversalTime()
         };
 
         db.Users.Add(user);

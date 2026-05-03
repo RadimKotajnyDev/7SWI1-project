@@ -33,10 +33,16 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [username, setUsername] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [dateOfBirth, setDateOfBirth] = useState("");
   const [confirmError, setConfirmError] = useState("");
 
-  const { mutate: registerUser, isPending, error } = useRegister(username);
+  const { mutate: registerUser, isPending, error } = useRegister({
+    firstName,
+    lastName,
+    dateOfBirth,
+  });
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -64,12 +70,36 @@ export const RegisterForm = ({ onSuccess }: RegisterFormProps) => {
         <Stack gap={4}>
           <Field.Root required>
             <Field.Label fontWeight="600" color="fg" fontFamily="body">
-              Username
+              First name
             </Field.Label>
             <Input
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-              placeholder="johndoe"
+              value={firstName}
+              onChange={(e) => setFirstName(e.target.value)}
+              placeholder="John"
+              {...INPUT_STYLES}
+            />
+          </Field.Root>
+
+          <Field.Root required>
+            <Field.Label fontWeight="600" color="fg" fontFamily="body">
+              Last name
+            </Field.Label>
+            <Input
+              value={lastName}
+              onChange={(e) => setLastName(e.target.value)}
+              placeholder="Doe"
+              {...INPUT_STYLES}
+            />
+          </Field.Root>
+
+          <Field.Root required>
+            <Field.Label fontWeight="600" color="fg" fontFamily="body">
+              Date of birth
+            </Field.Label>
+            <Input
+              type="date"
+              value={dateOfBirth}
+              onChange={(e) => setDateOfBirth(e.target.value)}
               {...INPUT_STYLES}
             />
           </Field.Root>

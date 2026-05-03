@@ -82,7 +82,7 @@ public class AuthTokenService : RefreshTokenService<TokenRequest, TokenResponse>
 
         privileges.Roles.AddRange(identity.Roles.Select(r => r.ToString()));
 
-        privileges.Claims.Add(new Claim(ClaimTypes.NameIdentifier, identity.Id.ToString()));
+        privileges.Claims.Add(new Claim("sub", identity.Id.ToString()));
         privileges.Claims.Add(new Claim(ClaimTypes.Email, identity.Email));
 
         privileges.Claims.Add(new Claim("iss", _config.Value.Issuer));

@@ -11,4 +11,8 @@ export const ROUTES = {
     name: "Home",
     path: "/",
   },
+  FRIDGE: {
+    name: "Fridge",
+    path: "/fridge",
+  },
 } as const;

@@ -17,14 +17,20 @@ export const useLogin = () => {
   });
 };
 
-export const useRegister = (username: string) => {
+interface RegisterProfileData {
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
+}
+
+export const useRegister = (profileData: RegisterProfileData) => {
   const queryClient = useQueryClient();
 
   return useMutation({
     mutationFn: (body: RegisterRequest) => register(body),
     onSuccess: async ({ accessToken }) => {
       setAccessToken(accessToken);
-      const profile = await createUserProfile({ username });
+      const profile = await createUserProfile(profileData);
       queryClient.setQueryData(userKeys.profile(), profile);
     },
   });

@@ -6,5 +6,7 @@ export interface UserProfile {
 }
 
 export interface CreateUserProfileRequest {
-  username: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string;
 }
