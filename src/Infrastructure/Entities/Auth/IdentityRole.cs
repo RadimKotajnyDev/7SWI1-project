@@ -2,5 +2,6 @@
 
 public enum IdentityRole
 {
-    User
+    User,
+    FridgeManager
 }

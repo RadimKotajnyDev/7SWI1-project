@@ -6,5 +6,6 @@
     <Project Path="src/Infrastructure/Infrastructure.csproj" />
     <Project Path="src/MigrationService/MigrationService.csproj" />
     <Project Path="src/ServiceDefaults/ServiceDefaults.csproj" />
+    <Project Path="src/SharedFridgeService/SharedFridgeService.csproj" />
     <Project Path="src/UserService/UserService.csproj" />
 </Solution>

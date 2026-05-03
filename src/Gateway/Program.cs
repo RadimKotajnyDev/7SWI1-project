@@ -7,6 +7,17 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.AddServiceDefaults();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+    {
+        policy.SetIsOriginAllowed(origin => true)
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials();
+    });
+});
+
 var key = "YourSuperSecretKeyGoesHere-MustBeLong"u8.ToArray();
 const string issuer = "auth-service";
 const string audience = "KanclIO";
@@ -52,6 +63,7 @@ builder.Services.AddReverseProxy()
 
 var app = builder.Build();
 
+app.UseCors("AllowAll");
 app.UseAuthentication();
 app.UseAuthorization();
 
