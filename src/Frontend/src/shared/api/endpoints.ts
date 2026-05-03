@@ -3,9 +3,19 @@ export const API_ENDPOINTS = {
     login: "/auth/login",
     register: "/auth/register",
     refresh: "/auth/refresh",
+    logout: "/auth/logout",
   },
-  userProfile: {
-    get: "/userProfile",
-    create: "/userProfile",
+  user: {
+    get: "/user/profile",
+    create: "/user/profile",
+    update: "/user/profile",
+    delete: "/user/profile",
+    exists: "/user/exists",
+  },
+  fridge: {
+    getAll: "/fridge/snacks",
+    create: "/fridge/snacks",
+    update: (id: string) => `/fridge/snacks/${id}`,
+    delete: (id: string) => `/fridge/snacks/${id}`,
   },
 } as const;
