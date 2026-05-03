@@ -52,8 +52,9 @@ builder.Services.AddReverseProxy()
             if (user.Identity?.IsAuthenticated != true) return ValueTask.CompletedTask;
 
             var roles = user.FindAll(ClaimTypes.Role).Select(c => c.Value);
-            var userId = user.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? user.Identity.Name;
-
+            var userId = user.FindFirst("sub")?.Value 
+                             ?? user.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            
             transformContext.ProxyRequest.Headers.Add("X-User-Roles", string.Join(",", roles));
             transformContext.ProxyRequest.Headers.Add("X-User-Id", userId ?? string.Empty);
 
@@ -68,4 +69,19 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapReverseProxy();
+
+app.Use(async (context, next) =>
+{
+    Console.WriteLine($"[DEBUG] Received Request: {context.Request.Method} {context.Request.Path}");
+    await next();
+    Console.WriteLine($"[DEBUG] Response Sent: {context.Response.StatusCode}");
+});
+
+
+app.Use(async (context, next) =>
+{
+    context.Response.Headers.Add("X-Generated-By", "YARP-Gateway");
+    await next();
+});
+
 await app.RunAsync();

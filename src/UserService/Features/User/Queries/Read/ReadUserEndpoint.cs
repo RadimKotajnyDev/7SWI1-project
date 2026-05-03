@@ -16,10 +16,25 @@ public class ReadUserEndpoint(UserDbContext db) : Endpoint<EmptyRequest, UserPro
 
     public override async Task HandleAsync(EmptyRequest request, CancellationToken ct)
     {
-        var identityId = Guid.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier)!);
+        var identityIdClaim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+        if (string.IsNullOrEmpty(identityIdClaim) || !Guid.TryParse(identityIdClaim, out var identityId))
+        {
+            Console.WriteLine($"[ERROR] Invalid IdentityId Claim: '{identityIdClaim}'");
+
+            await Send.UnauthorizedAsync(ct);
+            return;
+        }
+
         var user = await db.Users.SingleOrDefaultAsync(u => u.IdentityId == identityId, ct);
 
-        if (user is null) await Send.NotFoundAsync(ct);
-        else await Send.OkAsync(new UserProfileDto(user.Id, user.FirstName, user.LastName, user.DateOfBirth), ct);
+        if (user is null)
+        {
+            await Send.NotFoundAsync(ct);
+        }
+        else
+        {
+            await Send.OkAsync(new UserProfileDto(user.Id, user.FirstName, user.LastName, user.DateOfBirth), ct);
+        }
     }
 }
