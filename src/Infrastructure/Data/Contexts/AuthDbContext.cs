@@ -17,7 +17,5 @@ public class AuthDbContext(DbContextOptions<AuthDbContext> options) : DbContext(
             type => type.Namespace != null &&
                     type.Namespace.EndsWith($".Configuration.{Schemas.Auth}", StringComparison.OrdinalIgnoreCase)
         );
-
-        modelBuilder.HasDefaultSchema(Schemas.Auth);
     }
 }

@@ -16,7 +16,5 @@ public class UserDbContext(DbContextOptions<UserDbContext> options) : DbContext(
             type => type.Namespace != null &&
                     type.Namespace.EndsWith($".Configuration.{Schemas.User}", StringComparison.OrdinalIgnoreCase)
         );
-
-        modelBuilder.HasDefaultSchema(Schemas.User);
     }
 }

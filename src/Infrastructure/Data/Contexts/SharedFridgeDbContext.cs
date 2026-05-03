@@ -16,7 +16,5 @@ public class SharedFridgeDbContext(DbContextOptions<SharedFridgeDbContext> optio
             type => type.Namespace != null &&
                     type.Namespace.EndsWith($".Configuration.{Schemas.SharedFridge}", StringComparison.OrdinalIgnoreCase)
         );
-
-        modelBuilder.HasDefaultSchema(Schemas.SharedFridge);
     }
 }

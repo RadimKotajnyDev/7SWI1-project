@@ -18,6 +18,7 @@ public class RegisterEndpoint(AuthDbContext db, IOptions<JwtConfiguration> confi
     public override void Configure()
     {
         Post("/auth/register");
+        AllowAnonymous();
     }
 
     public override async Task HandleAsync(RegisterRequest req, CancellationToken ct)
