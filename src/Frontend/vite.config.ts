@@ -15,6 +15,7 @@ export default defineConfig(({mode}) => {
           target: env.VITE_GATEWAY_URL,
           changeOrigin: true,
           secure: false,
+          followRedirects: true,
           // Add this to help debug
           configure: (proxy, _options) => {
             proxy.on('error', (err, _req, _res) => {
