@@ -6,7 +6,7 @@ import type {
 
 export const getUserProfile = async (): Promise<UserProfile> => {
   const { data } = await axiosInstance.get<UserProfile>(
-    API_ENDPOINTS.userProfile.get,
+    API_ENDPOINTS.user.get,
   );
   return data;
 };
@@ -15,7 +15,7 @@ export const createUserProfile = async (
   body: CreateUserProfileRequest,
 ): Promise<UserProfile> => {
   const { data } = await axiosInstance.post<UserProfile>(
-    API_ENDPOINTS.userProfile.create,
+    API_ENDPOINTS.user.create,
     body,
   );
   return data;

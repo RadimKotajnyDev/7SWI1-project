@@ -1,22 +1,29 @@
 import { createBrowserRouter, Navigate } from "react-router";
 import { LoginPage } from "@/pages/login";
 import { RegisterPage } from "@/pages/register";
+import { HomePage } from "@/pages/home";
+import { ProtectedRoute } from "@/shared/ui/protected-route";
+import { ROUTES } from "./routes";
 
 export const router = createBrowserRouter([
   {
-    index: true,
-    element: <Navigate to="/login" replace />,
+    path: ROUTES.HOME.path,
+    element: (
+      <ProtectedRoute>
+        <HomePage />
+      </ProtectedRoute>
+    ),
   },
   {
-    path: "/login",
+    path: ROUTES.LOGIN.path,
     element: <LoginPage />,
   },
   {
-    path: "/register",
+    path: ROUTES.REGISTER.path,
     element: <RegisterPage />,
   },
   {
     path: "*",
-    element: <Navigate to="/login" replace />,
+    element: <Navigate to={ROUTES.HOME.path} replace />,
   },
 ]);

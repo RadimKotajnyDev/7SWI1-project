@@ -13,18 +13,18 @@ The .NET Aspire AppHost orchestrates PostgreSQL, MigrationService, all microserv
 **Frontend only:**
 ```bash
 cd src/Frontend
-npm run dev       # Vite dev server on port 3000
-npm run build     # TypeScript compile + Vite build
-npm run preview   # Preview production build
+bun run dev       # Vite dev server on port 3000
+bun run build     # TypeScript compile + Vite build
+bun run preview   # Preview production build
 ```
 
 **Frontend code quality:**
 ```bash
-npm run lint        # Biome linter
-npm run lint:fix    # Auto-fix linting issues
-npm run format      # Biome formatter
-npm run test        # Vitest unit tests
-npm run test:watch  # Tests in watch mode
+bun run lint        # Biome linter
+bun run lint:fix    # Auto-fix linting issues
+bun run format      # Biome formatter
+bun run test        # Vitest unit tests
+bun run test:watch  # Tests in watch mode
 ```
 
 **Backend build:**
