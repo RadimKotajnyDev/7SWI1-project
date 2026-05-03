@@ -1,8 +1,8 @@
 export interface UserProfile {
   id: string;
-  username: string;
-  email: string;
-  createdAt: string;
+  firstName: string;
+  lastName: string;
+  dateOfBirth: string | null;
 }
 
 export interface CreateUserProfileRequest {
