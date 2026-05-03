@@ -20,8 +20,11 @@ public class HeaderAuthHandler : AuthenticationHandler<AuthenticationSchemeOptio
     {
         if (!Request.Headers.TryGetValue("X-User-Id", out var userId))
         {
+            Logger.LogWarning("Missing X-User-Id header.");
             return Task.FromResult(AuthenticateResult.NoResult());
         }
+        
+        Logger.LogInformation("Authenticating user with id: {UserId}", userId);
 
         var claims = new List<Claim>
         {
@@ -30,6 +33,7 @@ public class HeaderAuthHandler : AuthenticationHandler<AuthenticationSchemeOptio
 
         if (Request.Headers.TryGetValue("X-User-Roles", out var roles))
         {
+            Logger.LogInformation("User has roles: {Roles}", roles);
             var roleList = roles.ToString().Split(',', StringSplitOptions.RemoveEmptyEntries);
             foreach (var role in roleList)
             {
