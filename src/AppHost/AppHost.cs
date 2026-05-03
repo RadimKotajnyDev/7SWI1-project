@@ -30,10 +30,10 @@ var gateway = builder.AddProject<Gateway>("gateway")
     .WithReference(sharedFridgeService)
     .WithExternalHttpEndpoints();
 
-var frontend = builder.AddJavaScriptApp("frontend", "../Frontend", "dev")
+var frontend = builder.AddViteApp("frontend", "../Frontend", "dev")
+    .WithBun()
     .WithReference(gateway)
     .WithEnvironment("VITE_GATEWAY_URL", gateway.GetEndpoint("http"))
-    .WithHttpEndpoint(port: 3173, name: "http")
     .WithExternalHttpEndpoints();
 
 await builder.Build().RunAsync();
