@@ -7,6 +7,7 @@ import {
   Heading,
   Icon,
   Menu,
+  Portal,
   Skeleton,
   Spacer,
   Stack,
@@ -195,56 +196,60 @@ export const HomePage = () => {
                   )}
                 </Button>
               </Menu.Trigger>
-              <Menu.Content
-                minW="200px"
-                p={0}
-                overflow="hidden"
-                border="2px solid"
-                borderColor="border"
-                borderRadius="md"
-                bg="bg"
-                boxShadow="md"
-              >
-                <Box
-                  px={4}
-                  py={3}
-                  borderBottom="2px solid"
-                  borderColor="border"
-                  bg="bg.subtle"
-                >
-                  <Text
-                    fontSize="sm"
-                    fontWeight="700"
-                    fontFamily="body"
-                    color="fg"
+              <Portal>
+                <Menu.Positioner>
+                  <Menu.Content
+                    minW="200px"
+                    p={0}
+                    overflow="hidden"
+                    border="2px solid"
+                    borderColor="border"
+                    borderRadius="md"
+                    bg="bg"
+                    boxShadow="md"
                   >
-                    {profile?.username ?? "—"}
-                  </Text>
-                  <Text
-                    fontSize="xs"
-                    color="fg.muted"
-                    fontFamily="body"
-                  >
-                    {profile?.email ?? "—"}
-                  </Text>
-                </Box>
-                <Box p={1}>
-                  <Menu.Item
-                    value="logout"
-                    color="#AB886D"
-                    fontFamily="body"
-                    fontWeight="600"
-                    borderRadius="none"
-                    _hover={{ bg: "bg.muted" }}
-                    onClick={() => {
-                      clearAccessToken();
-                      navigate(ROUTES.LOGIN.path);
-                    }}
-                  >
-                    Log out
-                  </Menu.Item>
-                </Box>
-              </Menu.Content>
+                    <Box
+                      px={4}
+                      py={3}
+                      borderBottom="2px solid"
+                      borderColor="border"
+                      bg="bg.subtle"
+                    >
+                      <Text
+                        fontSize="sm"
+                        fontWeight="700"
+                        fontFamily="body"
+                        color="fg"
+                      >
+                        {profile?.username ?? "—"}
+                      </Text>
+                      <Text
+                        fontSize="xs"
+                        color="fg.muted"
+                        fontFamily="body"
+                      >
+                        {profile?.email ?? "—"}
+                      </Text>
+                    </Box>
+                    <Box p={1}>
+                      <Menu.Item
+                        value="logout"
+                        color="#AB886D"
+                        fontFamily="body"
+                        fontWeight="600"
+                        borderRadius="none"
+                        _hover={{ bg: "bg.muted" }}
+                        onClick={() => {
+                          clearAccessToken();
+                          navigate(ROUTES.LOGIN.path);
+                        }}
+                      >
+                        Log out
+                      </Menu.Item>
+                    </Box>
+                  </Menu.Content>
+                </Menu.Positioner>
+              </Portal>
             </Menu.Root>
 
             <Box
