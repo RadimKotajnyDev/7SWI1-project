@@ -7,7 +7,6 @@ import {
   Heading,
   Icon,
   Menu,
-  Separator,
   Skeleton,
   Spacer,
   Stack,
@@ -24,10 +23,7 @@ import {
 } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { useUserProfile } from "@/entities/user";
-import {
-  ColorModeButton,
-  useColorModeValue,
-} from "@/shared/ui/color-mode";
+import { ColorModeButton } from "@/shared/ui/color-mode";
 
 interface FeatureCardProps {
   label: string;
@@ -45,55 +41,50 @@ const FeatureCard = ({
   accentColor,
 }: FeatureCardProps) => {
   const navigate = useNavigate();
-  const cardBg = useColorModeValue("#FFFAF5", "#1E1E2E");
-  const borderColor = useColorModeValue("#E8D5BB", "#2A2A3E");
-  const textColor = useColorModeValue("#2D1B00", "#F5E6D0");
-  const subtextColor = useColorModeValue("#8B6347", "#9A8A7A");
 
   return (
     <Box
-      display="block"
-      bg={cardBg}
-      border="2px solid"
-      borderColor={borderColor}
-      borderRadius="2xl"
+      bg="bg.subtle"
+      border="3px solid"
+      borderColor="border"
+      borderRadius="md"
       p={6}
       cursor="pointer"
-      transition="all 0.2s ease"
+      transition="all 0.15s ease"
+      boxShadow="md"
       onClick={() => navigate(href)}
       _hover={{
-        borderColor: accentColor,
-        transform: "translateY(-4px)",
-        boxShadow: `0 12px 32px -8px ${accentColor}44`,
+        boxShadow: "6px 6px 0px var(--chakra-colors-border)",
+        transform: "translate(-2px, -2px)",
       }}
-      _active={{ transform: "translateY(-1px)" }}
+      _active={{
+        boxShadow: "none",
+        transform: "translate(4px, 4px)",
+      }}
     >
       <Stack gap={4}>
-        <Box
-          w="48px"
-          h="48px"
-          borderRadius="xl"
-          bg={`${accentColor}22`}
-          display="flex"
-          alignItems="center"
-          justifyContent="center"
+        <Flex
+          w="44px"
+          h="44px"
+          border="2px solid"
+          borderColor="border"
+          align="center"
+          justify="center"
+          bg="bg"
         >
-          <Icon as={icon} boxSize={6} color={accentColor} />
-        </Box>
+          <Icon as={icon} boxSize={5} color={accentColor} />
+        </Flex>
         <Stack gap={1}>
           <Text
-            fontSize="lg"
-            fontWeight="600"
-            color={textColor}
-            fontFamily="'Space Grotesk', sans-serif"
+            fontSize="md"
+            fontWeight="700"
+            color="fg"
+            fontFamily="heading"
+            letterSpacing="-0.01em"
           >
             {label}
           </Text>
-          <Text
-            fontSize="sm"
-            color={subtextColor}
-            fontFamily="'Space Grotesk', sans-serif"
-          >
+          <Text fontSize="sm" color="fg.muted" fontFamily="body">
             {description}
           </Text>
         </Stack>
@@ -115,21 +106,21 @@ const FEATURE_CARDS: FeatureCardProps[] = [
     description: "Browse snacks, manage the wishlist",
     icon: LuPackage,
     href: "/snacks",
-    accentColor: "#6B8CFF",
+    accentColor: "#5B6FE0",
   },
   {
     label: "Coffee Roulette",
     description: "Who cleans the machine today?",
     icon: LuCoffee,
     href: "/coffee",
-    accentColor: "#E05D5D",
+    accentColor: "#D94F3D",
   },
   {
     label: "Admin Dashboard",
     description: "Roles, stats, system controls",
     icon: LuLayoutDashboard,
     href: "/admin",
-    accentColor: "#5DC87A",
+    accentColor: "#3D9E5C",
   },
 ];
 
@@ -137,49 +128,33 @@ export const HomePage = () => {
   const navigate = useNavigate();
   const { data: profile, isLoading } = useUserProfile();
 
-  const pageBg = useColorModeValue("#FDF6ED", "#13131F");
-  const navBg = useColorModeValue(
-    "rgba(253,246,237,0.85)",
-    "rgba(19,19,31,0.85)",
-  );
-  const borderColor = useColorModeValue("#E8D5BB", "#2A2A3E");
-  const headingColor = useColorModeValue("#2D1B00", "#F5E6D0");
-  const subtitleColor = useColorModeValue("#8B6347", "#9A8A7A");
-  const avatarBg = useColorModeValue("#C87941", "#6F3B00");
-
   return (
-    <Box minH="100vh" bg={pageBg}>
+    <Box minH="100vh" bg="bg">
       <Box
         as="nav"
         position="sticky"
         top={0}
         zIndex={100}
-        bg={navBg}
-        backdropFilter="blur(12px)"
-        borderBottom="1px solid"
-        borderColor={borderColor}
+        bg="bg"
+        borderBottom="2px solid"
+        borderColor="border"
         px={{ base: 4, md: 8 }}
         py={3}
       >
         <Flex align="center" maxW="1200px" mx="auto">
-          <Heading
-            as="span"
-            fontSize="2xl"
-            fontFamily="'Syne', sans-serif"
+          <Text
+            fontFamily="heading"
             fontWeight="800"
-            bgGradient="to-r"
-            gradientFrom="#C87941"
-            gradientTo="#E05D5D"
-            bgClip="text"
-            color="transparent"
-            letterSpacing="-0.02em"
+            fontSize="xl"
+            color="#C87941"
+            letterSpacing="-0.03em"
           >
-            Kancl.IO
-          </Heading>
+            KANCL.IO
+          </Text>
 
           <Spacer />
 
-          <Flex align="center" gap={3}>
+          <Flex align="center" gap={2}>
             <Menu.Root>
               <Menu.Trigger asChild>
                 <Button
@@ -187,52 +162,68 @@ export const HomePage = () => {
                   size="sm"
                   px={2}
                   gap={2}
-                  fontFamily="'Space Grotesk', sans-serif"
+                  border="2px solid transparent"
+                  borderRadius="none"
+                  fontFamily="body"
+                  transition="all 0.15s ease"
+                  _hover={{
+                    borderColor: "border",
+                    bg: "bg.muted",
+                    boxShadow: "xs",
+                  }}
                 >
                   {isLoading ? (
-                    <Skeleton
-                      h="24px"
-                      w="24px"
-                      borderRadius="full"
-                    />
+                    <Skeleton h="24px" w="24px" borderRadius="full" />
                   ) : (
-                    <Avatar.Root size="xs" bg={avatarBg} color="white">
+                    <Avatar.Root size="xs" bg="#C87941" color="fg">
                       <Avatar.Fallback>
                         {profile?.username?.charAt(0).toUpperCase() ?? "?"}
                       </Avatar.Fallback>
                     </Avatar.Root>
                   )}
                   {isLoading ? (
-                    <Skeleton h="14px" w="60px" borderRadius="sm" />
+                    <Skeleton h="14px" w="60px" />
                   ) : (
                     <Text
                       fontSize="sm"
                       fontWeight="600"
-                      fontFamily="'Space Grotesk', sans-serif"
+                      color="fg"
+                      fontFamily="body"
                     >
                       {profile?.username ?? "User"}
                     </Text>
                   )}
                 </Button>
               </Menu.Trigger>
-              <Menu.Content minW="200px" p={0} overflow="hidden">
+              <Menu.Content
+                minW="200px"
+                p={0}
+                overflow="hidden"
+                border="2px solid"
+                borderColor="border"
+                borderRadius="md"
+                bg="bg"
+                boxShadow="md"
+              >
                 <Box
                   px={4}
                   py={3}
-                  borderBottom="1px solid"
-                  borderColor={borderColor}
+                  borderBottom="2px solid"
+                  borderColor="border"
+                  bg="bg.subtle"
                 >
                   <Text
                     fontSize="sm"
                     fontWeight="700"
-                    fontFamily="'Space Grotesk', sans-serif"
+                    fontFamily="body"
+                    color="fg"
                   >
                     {profile?.username ?? "—"}
                   </Text>
                   <Text
                     fontSize="xs"
-                    opacity={0.6}
-                    fontFamily="'Space Grotesk', sans-serif"
+                    color="fg.muted"
+                    fontFamily="body"
                   >
                     {profile?.email ?? "—"}
                   </Text>
@@ -240,9 +231,11 @@ export const HomePage = () => {
                 <Box p={1}>
                   <Menu.Item
                     value="logout"
-                    color="red.500"
-                    fontFamily="'Space Grotesk', sans-serif"
-                    borderRadius="md"
+                    color="#D94F3D"
+                    fontFamily="body"
+                    fontWeight="600"
+                    borderRadius="none"
+                    _hover={{ bg: "bg.muted" }}
                     onClick={() => {
                       clearAccessToken();
                       navigate(ROUTES.LOGIN.path);
@@ -254,10 +247,11 @@ export const HomePage = () => {
               </Menu.Content>
             </Menu.Root>
 
-            <Separator
-              orientation="vertical"
+            <Box
+              w="2px"
               h="20px"
-              borderColor={borderColor}
+              bg="border"
+              mx={1}
             />
 
             <ColorModeButton />
@@ -275,24 +269,25 @@ export const HomePage = () => {
         <Stack gap={10}>
           <Stack gap={2}>
             {isLoading ? (
-              <Skeleton h="48px" w="300px" borderRadius="lg" />
+              <Skeleton h="56px" w="320px" />
             ) : (
               <Heading
                 as="h1"
-                fontSize={{ base: "3xl", md: "5xl" }}
-                fontFamily="'Syne', sans-serif"
+                fontSize={{ base: "4xl", md: "6xl" }}
+                fontFamily="heading"
                 fontWeight="800"
-                color={headingColor}
-                letterSpacing="-0.03em"
-                lineHeight="1.1"
+                color="fg"
+                letterSpacing="-0.04em"
+                lineHeight="1"
               >
-                Hey, {profile?.username}!
+                Hey, {profile?.username ?? "there"}!
               </Heading>
             )}
             <Text
-              fontSize={{ base: "md", md: "lg" }}
-              color={subtitleColor}
-              fontFamily="'Space Grotesk', sans-serif"
+              fontSize={{ base: "sm", md: "md" }}
+              color="fg.muted"
+              fontFamily="body"
+              fontWeight="500"
             >
               What are we doing at the office today?
             </Text>
