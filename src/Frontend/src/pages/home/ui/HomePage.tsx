@@ -1,21 +1,14 @@
 import {
-  Avatar,
   Box,
-  Button,
   Flex,
   Grid,
   Heading,
   Icon,
-  Menu,
-  Portal,
   Skeleton,
-  Spacer,
   Stack,
   Text,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router";
-import { clearAccessToken } from "@/shared/api";
-import { ROUTES } from "@/app/routes/routes";
 import {
   LuCoffee,
   LuLayoutDashboard,
@@ -24,7 +17,7 @@ import {
 } from "react-icons/lu";
 import type { IconType } from "react-icons";
 import { useUserProfile } from "@/entities/user";
-import { ColorModeButton } from "@/shared/ui/color-mode";
+import { AppLayout } from "@/widgets/app-layout";
 
 interface FeatureCardProps {
   label: string;
@@ -126,192 +119,50 @@ const FEATURE_CARDS: FeatureCardProps[] = [
 ];
 
 export const HomePage = () => {
-  const navigate = useNavigate();
   const { data: profile, isLoading } = useUserProfile();
 
   return (
-    <Box minH="100vh" bg="bg">
-      <Box
-        as="nav"
-        position="sticky"
-        top={0}
-        zIndex={100}
-        bg="bg"
-        borderBottom="2px solid"
-        borderColor="border"
-        px={{ base: 4, md: 8 }}
-        py={3}
-      >
-        <Flex align="center" maxW="1200px" mx="auto">
-          <Text
-            fontFamily="heading"
-            fontWeight="800"
-            fontSize="xl"
-            color="#AB886D"
-            letterSpacing="-0.03em"
-          >
-            KANCL.IO
-          </Text>
-
-          <Spacer />
-
-          <Flex align="center" gap={2}>
-            <Menu.Root>
-              <Menu.Trigger asChild>
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  px={2}
-                  gap={2}
-                  border="2px solid transparent"
-                  borderRadius="none"
-                  fontFamily="body"
-                  transition="all 0.15s ease"
-                  _hover={{
-                    borderColor: "border",
-                    bg: "bg.muted",
-                    boxShadow: "xs",
-                  }}
-                >
-                  {isLoading ? (
-                    <Skeleton h="24px" w="24px" borderRadius="full" />
-                  ) : (
-                    <Avatar.Root size="xs" bg="#AB886D" color="fg">
-                      <Avatar.Fallback>
-                        {profile?.username?.charAt(0).toUpperCase() ?? "?"}
-                      </Avatar.Fallback>
-                    </Avatar.Root>
-                  )}
-                  {isLoading ? (
-                    <Skeleton h="14px" w="60px" />
-                  ) : (
-                    <Text
-                      fontSize="sm"
-                      fontWeight="600"
-                      color="fg"
-                      fontFamily="body"
-                    >
-                      {profile?.username ?? "User"}
-                    </Text>
-                  )}
-                </Button>
-              </Menu.Trigger>
-              <Portal>
-                <Menu.Positioner>
-                  <Menu.Content
-                    minW="200px"
-                    p={0}
-                    overflow="hidden"
-                    border="2px solid"
-                    borderColor="border"
-                    borderRadius="md"
-                    bg="bg"
-                    boxShadow="md"
-                  >
-                    <Box
-                      px={4}
-                      py={3}
-                      borderBottom="2px solid"
-                      borderColor="border"
-                      bg="bg.subtle"
-                    >
-                      <Text
-                        fontSize="sm"
-                        fontWeight="700"
-                        fontFamily="body"
-                        color="fg"
-                      >
-                        {profile?.username ?? "—"}
-                      </Text>
-                      <Text
-                        fontSize="xs"
-                        color="fg.muted"
-                        fontFamily="body"
-                      >
-                        {profile?.email ?? "—"}
-                      </Text>
-                    </Box>
-                    <Box p={1}>
-                      <Menu.Item
-                        value="logout"
-                        color="#AB886D"
-                        fontFamily="body"
-                        fontWeight="600"
-                        borderRadius="none"
-                        _hover={{ bg: "bg.muted" }}
-                        onClick={() => {
-                          clearAccessToken();
-                          navigate(ROUTES.LOGIN.path);
-                        }}
-                      >
-                        Log out
-                      </Menu.Item>
-                    </Box>
-                  </Menu.Content>
-                </Menu.Positioner>
-              </Portal>
-            </Menu.Root>
-
-            <Box
-              w="2px"
-              h="20px"
-              bg="border"
-              mx={1}
-            />
-
-            <ColorModeButton />
-          </Flex>
-        </Flex>
-      </Box>
-
-      <Box
-        as="main"
-        maxW="1200px"
-        mx="auto"
-        px={{ base: 4, md: 8 }}
-        py={{ base: 8, md: 12 }}
-      >
-        <Stack gap={10}>
-          <Stack gap={2}>
-            {isLoading ? (
-              <Skeleton h="56px" w="320px" />
-            ) : (
-              <Heading
-                as="h1"
-                fontSize={{ base: "4xl", md: "6xl" }}
-                fontFamily="heading"
-                fontWeight="800"
-                color="fg"
-                letterSpacing="-0.04em"
-                lineHeight="1"
-              >
-                Hey, {profile?.username ?? "there"}!
-              </Heading>
-            )}
-            <Text
-              fontSize={{ base: "sm", md: "md" }}
-              color="fg.muted"
-              fontFamily="body"
-              fontWeight="500"
+    <AppLayout>
+      <Stack gap={10}>
+        <Stack gap={2}>
+          {isLoading ? (
+            <Skeleton h="56px" w="320px" />
+          ) : (
+            <Heading
+              as="h1"
+              fontSize={{ base: "4xl", md: "6xl" }}
+              fontFamily="heading"
+              fontWeight="800"
+              color="fg"
+              letterSpacing="-0.04em"
+              lineHeight="1"
             >
-              What are we doing at the office today?
-            </Text>
-          </Stack>
-
-          <Grid
-            templateColumns={{
-              base: "1fr",
-              sm: "repeat(2, 1fr)",
-              lg: "repeat(4, 1fr)",
-            }}
-            gap={4}
+              Hey, {profile?.firstName ?? "there"}!
+            </Heading>
+          )}
+          <Text
+            fontSize={{ base: "sm", md: "md" }}
+            color="fg.muted"
+            fontFamily="body"
+            fontWeight="500"
           >
-            {FEATURE_CARDS.map((card) => (
-              <FeatureCard key={card.href} {...card} />
-            ))}
-          </Grid>
+            What are we doing at the office today?
+          </Text>
         </Stack>
-      </Box>
-    </Box>
+
+        <Grid
+          templateColumns={{
+            base: "1fr",
+            sm: "repeat(2, 1fr)",
+            lg: "repeat(4, 1fr)",
+          }}
+          gap={4}
+        >
+          {FEATURE_CARDS.map((card) => (
+            <FeatureCard key={card.href} {...card} />
+          ))}
+        </Grid>
+      </Stack>
+    </AppLayout>
   );
 };
