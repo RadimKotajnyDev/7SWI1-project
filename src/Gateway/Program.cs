@@ -18,7 +18,7 @@ builder.Services.AddCors(options =>
     });
 });
 
-var key = "YourSuperSecretKeyGoesHere-MustBeLong"u8.ToArray();
+var key = "Your-32-Character-Long-Secret-Key-Here"u8.ToArray();
 const string issuer = "auth-service";
 const string audience = "KanclIO";
 builder.Services.AddAuthentication("Bearer")
