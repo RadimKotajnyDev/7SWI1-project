@@ -56,12 +56,12 @@ Intermediates derived from anchors: `#C5AA97` (light muted), `#7A5F4B` (dark mut
 
 | Token | Light value | Dark value | Usage |
 |-------|------------|-----------|-------|
-| `bg` | `#E4E0E1` | `#493628` | Page background |
-| `bg.subtle` | `#D6C0B3` | `#5C4535` | Card fills, input backgrounds |
-| `bg.muted` | `#C5AA97` | `#7A5F4B` | Hover fills |
+| `bg` | `#E4E0E1` | `#110A06` | Page background |
+| `bg.subtle` | `#D6C0B3` | `#1E1108` | Card fills, input backgrounds |
+| `bg.muted` | `#C5AA97` | `#2D1A0E` | Hover fills |
 | `fg` | `#493628` | `#E4E0E1` | Primary text |
-| `fg.muted` | `#7A5F4B` | `#D6C0B3` | Secondary / helper text |
-| `border` | `#493628` | `#E4E0E1` | All borders (thick, always visible) |
+| `fg.muted` | `#7A5F4B` | `#AB886D` | Secondary / helper text |
+| `border` | `#493628` | `#C5AA97` | All borders (thick, always visible) |
 | `brand` | `#AB886D` | `#AB886D` | Warm tan — primary accent |
 | `brand.hover` | `#7A5F4B` | `#C4A98E` | Brand hover state |
 
@@ -78,7 +78,7 @@ Intermediates derived from anchors: `#C5AA97` (light muted), `#7A5F4B` (dark mut
 
 | Token | Value | Notes |
 |-------|-------|-------|
-| `shadow.hard` | `#493628` (light) / `#E4E0E1` (dark) | Shadow color for hard offset shadows |
+| `shadow.hard` | `#493628` (light) / `#C5AA97` (dark) | Shadow color for hard offset shadows |
 
 ---
 

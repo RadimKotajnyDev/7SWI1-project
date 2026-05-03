@@ -38,8 +38,11 @@ const config = defineConfig({
           umber: { value: "#7A5F4B" },
           bark: { value: "#5C4535" },
           espresso: { value: "#493628" },
-          darkMist: { value: "#5C4535" },
-          darkDust: { value: "#7A5F4B" },
+          darkBg: { value: "#110A06" },
+          darkSubtle: { value: "#1E1108" },
+          darkMuted: { value: "#2D1A0E" },
+          darkBorder: { value: "#C5AA97" },
+          darkFgMuted: { value: "#AB886D" },
         },
       },
       radii: {
@@ -66,19 +69,19 @@ const config = defineConfig({
           DEFAULT: {
             value: {
               base: "{colors.palette.white}",
-              _dark: "{colors.palette.espresso}",
+              _dark: "{colors.palette.darkBg}",
             },
           },
           subtle: {
             value: {
               base: "{colors.palette.mist}",
-              _dark: "{colors.palette.darkMist}",
+              _dark: "{colors.palette.darkSubtle}",
             },
           },
           muted: {
             value: {
               base: "{colors.palette.dust}",
-              _dark: "{colors.palette.darkDust}",
+              _dark: "{colors.palette.darkMuted}",
             },
           },
         },
@@ -92,7 +95,7 @@ const config = defineConfig({
           muted: {
             value: {
               base: "{colors.palette.umber}",
-              _dark: "{colors.palette.mist}",
+              _dark: "{colors.palette.darkFgMuted}",
             },
           },
         },
@@ -100,7 +103,7 @@ const config = defineConfig({
           DEFAULT: {
             value: {
               base: "{colors.palette.espresso}",
-              _dark: "{colors.palette.white}",
+              _dark: "{colors.palette.darkBorder}",
             },
           },
         },
