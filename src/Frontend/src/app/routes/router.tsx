@@ -2,6 +2,7 @@ import { createBrowserRouter, Navigate } from "react-router";
 import { LoginPage } from "@/pages/login";
 import { RegisterPage } from "@/pages/register";
 import { HomePage } from "@/pages/home";
+import { FridgePage } from "@/pages/fridge";
 import { ProtectedRoute } from "@/shared/ui/protected-route";
 import { ROUTES } from "./routes";
 
@@ -11,6 +12,14 @@ export const router = createBrowserRouter([
     element: (
       <ProtectedRoute>
         <HomePage />
+      </ProtectedRoute>
+    ),
+  },
+  {
+    path: ROUTES.FRIDGE.path,
+    element: (
+      <ProtectedRoute>
+        <FridgePage />
       </ProtectedRoute>
     ),
   },
