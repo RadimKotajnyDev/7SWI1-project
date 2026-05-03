@@ -24,7 +24,6 @@ public class LoginEndpoint(AuthDbContext db, IOptions<JwtConfiguration> config) 
         var passwordHash = SecurityHelper.HashPassword(req.Password);
 
         var identity = await db.Identities
-            .Include(i => i.Roles)
             .SingleOrDefaultAsync(i => i.Email == req.Email && i.PasswordHash == passwordHash, ct);
 
         if (identity is null)
